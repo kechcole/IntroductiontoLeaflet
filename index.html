@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Leaflet JS Seccond JS.</title>
+
+    <!-- sets the viewport to the width of the device and renders it by a ratio of 1:1. -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /> -->
+
+    <!-- Link an external css -->
+    <link rel="stylesheet" href="css/external.css" type="text/css">
+
+    <!-- Link cdn Leaflet css and JS files  -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+</head>
+<style>
+    body {
+        background-image: url("images/background.jpg");
+        background-repeat: no-repeat;
+        /* Do not repeat the image */
+        background-size: cover;
+        color: black;
+    }
+</style>
+
+<body>
+
+    <h1>CHAPTER 1. INTRODUCTION TO LEAFLET JS.</h1>
+    <P>Leaflet is a JS library used to develop intercative web applications.
+        It is a highly scalable library that suits your business needs, from
+        building simple maps to highly complex ones.
+        Basic requirements for a simple web map are :
+    <ul>
+        <li>1. Reference JS and CSS files. </li>
+        <li>2. A div container to hold the map. </li>
+        <li>3. A map object.</li>
+        <li>4. A tile layer, base layer. </li>
+    </ul>
+    We will load a hoisted Leaflet into our page by linking it to our html page inside
+    the head tag just below the title. <br>
+    We need a place to put our map, a container where our map will be held. This
+    can be created using a div tag with an unique identity so that in can be reference by
+    a map object. We will be craating different maps along the way so wee need to define
+    the height and with for each inside the tag.
+
+    <h3>Creating a Map Obect.</h3>
+
+    A crucial first step is to create a map object inside a JS file. The map is initialised
+    and various parameters passed including center and zoom values. For our case it will be
+    around Nairobi region. The code creats a new instance of a map class and assign it a
+    name, map. <i>var map = L.map("map").setView([-1.28333, 36.81667], 13);</i>
+    <br>
+    <br>
+
+    The last step includes adding a tile later, this can be thought as a basemap onto which
+    other layers will be added. These pixel images are provided by service provides and some need to
+    be paid for although many are open source. They require aURL link to a server, let use
+    open strett map layer. <i></i> <br>
+    Code snipet for map1 : <br>
+    <img src="Code snipets/map1JS.png" alt="Map1 js code" height="500px" width="900px">
+    <br>
+    Other map providers anclude : Open Street Map, OpenTopoMap etc.
+    </P>
+
+    <div id="map1" style="width: 800px; height: 400px">MAP 1</div>
+    <br>
+
+    <h3>Adding a Web Mapping Service Service Layer Tile.</h3>
+    <p>
+        WMS is a type of tile that can be added into Leaflet map. WMS is an Open Geospatial Consortium
+        specification (OGC) specification that defines a way of requesting and transfering images over
+        the web. Its a type of raster layer. Because Leaflet does not understand WMS, you need to create
+        a tile layer using the following function : <i><b>L.TileLayer.WMS()</b></i> , it takes a URL and
+        a set op parameters. <br><br>
+
+        <img src="Code snipets/wmsmap.png" alt="Map1 js code" height="500px" width="900px"> <br>
+
+        Above JS code produced this map : <br><br>
+    <div id="wmsdiv" style="width: 800px; height: 400px"></div>
+
+    <br>
+    Other WMS can be located <a href="https://leafletjs.com/examples/wms/wms.html">Leaflet.com</a>
+    </p>
+
+    <h3>Multiple Tile layers.</h3>
+
+    <p>
+        Multiple tile layers can be stacked on top of each other. In the map below we will add
+        SRTM30-Colored-Hillshade WMS layer on top of Stadia Allidade smooth dark tile layer which is
+        made transparent considering it does not cover the oceans. These balnk spaces allow
+        <a href="https://leaflet-extras.github.io/leaflet-providers/preview/#filter=Stadia.AlidadeSmoothDark">
+            Stadia dark image</a> to be visible. They are mosaiced. When transparency is set to false,
+        areas with no data will be displayed as white.
+
+        <img src="Code snipets/srtmwms.png" alt="Map1 js code" height="700px" width="900px"> <br>
+
+        Above JS code produced this map :
+    <div id="wmsdiv2" style="width: 800px; height: 400px"></div>
+    </p><br>
+
+    <h3>Add Data to your map.</h3>
+
+    <p>
+        Three geometric primitives of vector data can be added to a map, they include: points, lines
+        and polygons.
+
+    <h4>a. Points</h4>
+
+    In Leaflet JS, points are added to maps using marker class. They require latitude and longitude
+    features which are assigned to a variable to allow you interact with them and added to a map
+    just like tile layers. The marker class has options, methods, and events to make you points
+    more usefull and interactive. Option objects are not neccessary, they include : icon, clickable,
+    dragable, title and many more. Title option is a tooltip that will be displayed when you hover
+    around a point while alt, is the alterntive text that is read. <br>
+    Lets create a marker that is placed in the Capital Nairobi and the user can drag it around. <br>
+
+    <img src="Code snipets/nrbmarker.png" alt="dragable marker code" style="height: 500px; width: 1000px;"><br>
+    <br>
+    Above JS code produced this map :
+    <div id="map4" style="width: 800px; height: 400px;"></div> <br>
+
+    <h4>b. Polylines. </h4>
+    Leaflet JS has Polyline class to deal with vector line objects. One must provide at least one array of
+    coordinate pair to draw this feature. If there multiple lines one must give an nested array of its
+    geographic points i.e <br> <i><b>var latlngs = [ [[45.51, -122.68], [37.77, -122.43], [34.04, -118.2]], <br>
+            [[40.78, -73.91], [41.83, -87.62], [32.76, -96.72]] ];</b></i> <br>
+    Optional parameters include : colour, weight. Lets add road features. <br>
+    <img src="Code snipets/polylines.png" alt="polylines code" style="height: 900px; width: 1000px;"><br>
+
+    Above JS code produced this map :
+    <div id="road" style="width: 800px; height: 400px;"></div>
+
+    <h4>c. Polygons</h4>
+    A polygon is a polyline that is closed. Leaflet has two classes for drawing these features: circle
+    and rectangle and a user must specify a minimum of three coordinates. The ending point need not to
+    be specified as it will be automatically detected by Leaflet. <br>
+    Lets create various shapes covering Mau region. <br>
+
+    <img src="Code snipets/shapes.png" alt="different shapes code" style="width: 900px; height: 700px;"> <br>
+
+    Above JS code produced this map :
+    <div id="area" style="height: 400px; width: 800px;"></div> <br>
+
+    <h4>d. Multipolyline.</h4>
+    Multipolylines are somehow similar to polylines, but they are used to store sets of coordinates
+    for each feature. When you want to map similar features of the same entity,i.e parks, rivers,
+    it is appropriate to use multipolylines. Lets group polygons with popup messages when clicked
+    and overlay them. Optional parameters will apply to every feature in the collection, thus will
+    all have the same colour, weight,popup and opacity. <br>
+
+    <img src="Code snipets/group1.png" alt="Vector Groups code" style="width: 900px; height: 700px;"> <br>
+
+    <div id="areas" style="height: 400px; width: 800px;"></div> <br>
+
+    <h4>e. Group layers.</h4>
+    We have dealt with adding features of the same type, but in cases where you would like to group
+    different layer types as one, you would use layer/feature group. This makes management very easy as
+    they can all be manipulated(added/deleted) easily as a single unit. In this situation, individual
+    layer groups are NOT added directly to the map as done previously but rather <i><b>layergroup()</b></i>
+    command will. <br>
+    This function takes layers to be placed inside the map as parameters. But if you dont want to add
+    a layer as a parameter, <i><b>addLayer()</b></i> function is used, the method takes a layer as a
+    parameter. <br>
+    If you want to remove a layer from a group <i><b>removeLayer()</b></i> method is used and it will no
+    longer be displayed because <i><b>addTo()</b></i> function was called on the group and not the
+    individual element. <br>
+    If you want to remeove a layer from the group but you need it to be displayed then, you use the same
+    method to remove and then call <i><b>addTo()</b></i> method on it as an individual element.<br>
+    A new layer can be added to the group and be displayed on the map using <i><b>addLayer()</b></i> method. <br> <br>
+
+    <img src="Code snipets/grouplayer.png" alt="Group Layers code" style="width: 900px; height: 1200px;">
+    <br><br>
+
+    Above JS code produced this map :
+    <div id="groupLayer" style="height: 400px; width: 800px;"></div><br><br>
+
+    All styles options and popups need to be assigned to individual layers when created because they
+    cant be applied on a group layer. This is where feature groups come in as shown after this map. <br>
+
+    <h3>f. Feature Groups.</h3>
+    <br>
+    Feature groups is similar to layer group, it extends its functionality by making it more easy to deal
+    with group members. The constructor <i><b>L.featureGroup()</b></i> accepts layers as parameters and
+    you can assign a pop up and style or add events to all layers at once. Lets add layers used in group
+    layers and add a single pop up to all of them. <br><br>
+
+    <img src="Code snipets/feratureGroup.png" alt="feature groups code" style="height: 1200px; width: 900px;">
+    <br><br>
+
+    Above JS code produced this map : <br> <br>
+    <div id="featureGroup" style="width: 800px; height: 400px;"></div>
+    </p>
+
+    <h3>Popups. </h3>
+
+    <p>
+        Popups provide a way of users to interact with the map by providing more information.
+        The simplest way is to add <i><b>bindPopup()</b></i> method to a variable associated to a
+        layer and passing contents as parameters. Leaflet JS has a popup class that can be instantiated
+        and assigned to multiple objects, <i><b>L.popup(parameters).</b></i> A great thing about popups
+        is that they can accept HTML elements, thus when you have a lot of details you can segment
+        them to many lines using tags. Create layers with different types of popups. <br> <br>
+
+        <img src="Code snipets/popup.png" alt="Popups" style="height: 1200px; width: 900px;"> <br> <br>
+
+        Above JS code produced this map : <br> <br>
+    <div id="popupMap" style="width: 800px; height: 400px;"></div>
+    </p>
+
+    <h3>Mobile Mapping.</h3><br><br>
+
+    <h3>Event and Event handlers.</h3>
+
+    <p>
+        Event handling allows websites to respond to user activities such as clicking and hovering.
+        These events are assigned to functions that process them and give an output as desired by
+        the programmer. Leaflet's map class contains over 30 events associated with a map object.
+        An example: You can write a function that fires when a user clicks on a map. <br>
+        Leaflet acts on these listeners by way of reference meaning you must define them as a function.
+        After initialising a map object, you attach a method that takes in the event and function
+        as parameters. <br> The map's on() method takes name of the event as first parameter and a callback
+        function that will respond to the event as its second parameter.
+        MouseEvent, commonly written as e, is an event object that is sent to the function responsible for
+        an event when an event is triggered. It contains information(gotten from e properties) about the event,
+        they include but not limited to: timestamp(e.timestamp), coordinates(e.latlng), type of layer(e.layerType) ,
+        layer(e.layer). More information can be found at this
+        <a href="https://www.syncfusion.com/succinctly-free-ebooks/leafletjs/handling-events">Syncfusion</a> site.
+        <br>
+        <br>
+        Lets create an event that alerts the user when he clicks on the map. <br> <br>
+
+        <img src="Code snipets/eventListener1.png" alt="Click event code" style="height: 500px; width: 800px;"> <br><br>
+
+        Above JS code produced this map :
+    <div id="event1" style="height: 400px; width: 800px;"></div><br><br>
+
+    Create an event handler that adds a marker to the map when the user clicks the map and has
+    a popup showing the coordinates. <br><br>
+
+    <img src="Code snipets/markerEvent.png" alt="Add Coordinates to map code"
+        style="height: 800px; width: 800px;"><br><br>
+
+    Above JS code produced this map :
+    <div id="event2" style="height: 400px; width: 800px;"></div><br><br>
+
+    Create a draggable marker that has a popup displaying new location after being dragged. Markers have
+    three events that deal with gragging: <i><b>dragstart</b></i>, <i><b>drag</b></i> and <i><b>dragend</b></i><br><br>
+    REVIEW CODE NEW LOCATION POPUP INCOREECT.
+
+    <img src="Code snipets/dragEvent1.png" alt="Dragable marker event code"
+        style="height: 700px; width: 800px;"><br><br>
+
+    Above JS code produced this map : <br> <br>
+
+    <div id="event3" style="height: 400px; width: 800px;">Map</div> <br><br>
+
+    Next we are going to develop a map containing draggable marker, with two events that
+    monitor changes in position. We need to fire two functions, at the start and end of dragging. <br><br>
+    Do futher RESEARCH, MAP 15
+    <img src="" alt=""> <br><br>
+
+    Above JS code produced this map : <br> <br>
+    <div id="event4" style="height: 300px; width: 800px;"></div> <br><br>
+
+
+    <H3>Custom functions.</H3>
+    <div>
+        <p>
+            Once you have subscribed to an event, you handle it with a function that takes an
+            event as a parameter. Leaflet JS can pass anything to the function, it must not be neccessarily
+            be called in responce to an event. <br>
+            Create a function that returns a popup and is triggered on call and not by a trigger event.
+            The function is to be reused in multiple custom pop ups that we wish to be similar. It will take
+            a string we intend to be popup message. <i><b>createPopup()</b></i> takes message content as parameter.
+            <br><br>
+            Popup size can also be customised to fit ones needs, you can determine their sizes especially if
+            they are many in number.
+
+            <img src="Code snipets/customFunctionandPopup.png" alt="Custom function code"
+                style="height: 1400px; width: 800px;"><br><br>
+
+            Above JS code produced this map : <br> <br>
+        <div id="customFun" style="height: 500px; width: 800px;"></div><br><br>
+
+    </div>
+    </p>
+
+
+    <h1>CHAPTER 2. MAPPING GEOJSON DATA.</h1>
+
+    <div class="topic2-para1">
+        <h3>Understanding Geojson.</h3>
+
+        <p>
+            JSON is a JavaScript, human readable, and light weight data exchange format that
+            was introduced as an alternaitive to XML which was considered heavyweight and cumbersome
+            to deal with. JSON is platform dependent(all languages can generate JSON data) and self describing
+            thus widely used as a data storage and transfer format. <br>
+            Considering the increasing need to communicate between client and server over the internet,
+            JSON could come at a better time. It resemble the way objects are created in JS by using opening
+            and closing curly brackets and inside it key-value pairs are hosted. <br>
+            GEO-JSON is a JSON format used to transfer geometries. Through it, users can encode any type of
+            spatial data together with their properties(attributes) either. You can describe points, lines and
+            polygons using GeoJson and group them into multipoints, multilines and multipolygons. The conviniency
+            and portability of GeoJSON data is amazing for web developers as in lessens the work. To add this kind
+            of data into a webmap, you simply assign it to a variable and add as an instance of the geojson class.
+            You can also easily convert JSON data to GeoJSON by adding type, geometry and property objects. <br>
+            Take the following example : <br><br>
+        </p>
+
+        <img src="Code snipets/jsonToGeojson.png" alt="json to geo-json code" style="height: 1000px; width: 800px;">
+        <br><br>
+
+
+        Lets add a map of regions in Nairobi containing GeoJSON data format.
+        <br><br>
+
+        <img src="Code snipets/nrbGeoJson.png" alt="Geojson Polygon code" style="height: 1200px; width: 900px;">
+        <br></br>
+
+        Above JS code produced this map : <br> <br>
+        <div id="areaPolygon" style="height: 500px; width: 800px;">Geojson Area Map</div><br><br>
+
+    </div>
+
+
+    <div class="topic2-para2">
+        <h3>Adding Multiple Geometries in GeoJSON.</h3>
+
+        <p>
+            Leaflet can load multiple geometries in a single geoJSON file. Lets create a map
+            containing multiple features in a single map. In order to create a geoJSON file, you
+            can visit <a href="http://geojson.io/#map=8.77/-1.2062/36.8157">geojson.io</a>.
+        </p>
+
+        <img src="Code snipets/multifeatureGeojson.png" alt="Multifeature geojson Code"
+            style="height: 1500; width: 800px;"> <br><br>
+
+        Above JS code produced this map : <br> <br>
+        <div id="multifeaturePolygon" style="height: 500px; width: 800px;"></div>
+
+    </div>
+
+
+    <div class="topic2-para3">
+        <h3>Styling GeoJSON layers.</h3>
+        <p>
+            GeoJSON objects have methods and properties that can be used to style the map.
+            Using the style optional parameter, one can specify the function that will style
+            the layer. <br>
+            Style each feature with a different colour for the map above, refer <a
+                href="http://webgis.pub/leaflet-geoJSON.html">webgis.pub</a> <br><br>
+
+            FURTHER RESEARCH RECOMENDED
+
+        </p> <br><br>
+
+        <img src="" alt="feature stylying code"><br><br>
+
+        Above JS code produced this map : <br> <br>
+        <div id="jsonfeaturestyled" style="height: 500px; width: 800px;"></div><br><br>
+
+        <p>
+            The setStyle() method allows you to change the style after one has already been
+            applied or by using events. While resetStyle() allows you to return to original
+            style. <br><br>
+            Create a map that uses an event call to change original purple layer colour based on an event.
+            Move the mouse over a layer(changes to green), right click(yellow) and then drag mouse out of the
+            layer(changes to purple) to observe changes. <br>
+            N/B <i><b>e.target</b></i> gives you access to the group (so that you can reset the style of that group
+            rather than others)<br>
+        </p>
+
+        <img src="Code snipets/jsonStyle2.png" alt="Layer styling with event" style="height: 1200px; width: 800px;">
+        <br><br>
+
+        Above JS code produced this map : <br> <br>
+        <div id="stylejsonevent" style="height: 400px; width: 800px;">Map 19</div> <br><br>
+
+        <p>
+            From the above map, the layers are not behaving as intended, when the mouse moves off
+            any layer it doesnt revert to original code. So i tweaked the code and added a new function
+            that returns feature layer to its original code. Code worked successfully. <br><br>
+        </p>
+
+        <img src="Code snipets/jsonStyling3.png" alt="Layer styling with event"
+            style="height: 1200px; width: 800px;"><br><br>
+
+        Above JS code produced this map : <br> <br>
+        <div id="stylejsonevent3" style="height: 400px; width: 800px;">Map 20</div><br><br>
+    </div>
+
+
+    <div>
+        <h3>Iterating Through Each Feature.</h3>
+
+        <p>
+            An iterative process give you more control by allowing further actions on each layer
+            before being added to the map. These three functions can be passed to the a GeoJSON object
+            as Optional parameters : <i><b>onEachFeature, pointToLayer, and filter</b></i>. <br>
+
+            Create a map with each feature having popup message as its being added to the map.
+            The code should use <i><b>onEachFeature option</b></i> that takes a function to bind popup.
+
+        </p><br><br>
+
+        <img src="Code snipets/loopAddPopup.png" alt="Loop geojson attaching popup Code"
+            style="height: 1000px; width: 800px;"><br><br>
+
+        Above JS code produced this map : <br> <br>
+        <div id="loopjson1" style="height: 400px; width: 800px;">Map 21</div>
+    </div>
+
+    <div>
+        <h3>Creating layers from points.</h3>
+
+        <p>
+            To create a layer from a point, <i><b>pointToLayer</b></i> option is used. <br>
+            Create a circle for each marker point and style it. <br><br>
+
+            <img src="" alt="Geojson point to layer code"
+            style="height: 800px; width: 800px;"> <br><br>
+
+        <div id="loopjson2" style="height: 400px; width: 800px;">Map 22</div>
+
+        </p>
+    </div><br><br>
+
+    <h1>CHAPTER 3. CREATING HEAT MAPS AND CHOROPLETH MAPS.</h1>
+
+    <p>
+        A heat map is a graphical representation of data where values are depicted by colour.
+        It can visualise complex data making information more understandable. Heat can depict
+        point data in two major ways, either through density or intensity. In the former clustering
+        creates heat while in the later value associated to a point, intensity score, is used to
+        colour the grid. Low values are coloured blue while high values are red. <br>
+        Heatrmaps are essentially created by overlaying and colouring grids on the map. <br><br>
+        Create an intensity heatmap of points colected in New Zealand in array format. <br><br>
+        
+        <img src="Code snipets/intensityHeatmap.png" alt="density heatmap" 
+        style="height: 800px; width: 800px;"><br><br>
+
+        Above JS code produced this map : <br> <br>
+    <div id="heatmap" style="height: 400px; width: 800px;"></div>MAP 23<br><br>
+
+        GeoJSON data can also be used to create heatmaps. <br><br>
+        Create an intensity heatmap of major kenyan population from data in geojson format. <br><br>
+
+        <img src="Code snipets/24.intensityHeatmap.png" alt="intensity heatmap" 
+        style="height: 1800px; width: 800px;"><br><br>
+
+        Above JS code produced this map : <br> <br>
+        <div id="heatmap2" style="height: 400px; width: 800px;">MAP 24</div>
+    </p>
+
+    <p>
+        <h3>Applying changes to Geojson Layers. </h3>
+
+        What if we want to access and manipulate our features (e.g., proportional symbols) later on, 
+        such as resizing the symbols for a different data attribute? This is where GeoJson's methods come into play. <br>
+        The power of web mapping lies not in just in our ability to dynamically create data driven 
+        maps but rather in its potential to change when it has been drawn. Such event-driven changes 
+        might change the map in multiple ways: add and remove data layers, filter, update or resymbolize it.
+        These changes can be automated(i.e real time data updates) or in most ocassions, users interacting 
+        with it. <br><br>
+
+        To access a geojson layer, we need to store it in a reference variable. We then apply methods 
+        belonging to a GeoJSON Layer to retrieve information from te features or modify layers. <br>
+        Recall that Leaflet's GeoJson layer extends L.FeatureGroup, which does have a setStyle() method, this 
+        method can be used to change the colour of our circle markerds to whatever we want. <br>
+        Lets modify MAP 24 markers by changing thier colours. We expect the <i><b>setStyle()</b></i> method to uniformly 
+        changed the style options of the elements contained within the layer referenced by the populationLayer variable, 
+        turning dark blue circles into light blue circles<br><br>
+
+        <img src="Code snipets/25.heatmaplayerChange.png" alt="styling heatmap code" 
+        style="height: 1800px; width: 800px;"> <br><br>
+
+        Above JS code produced this map : <br> <br>
+        <div id="heatmap3" style="height: 400px; width: 800px;">MAP 25</div>
+
+    </p>
+    <p>
+        <h3>Accessing individual Elements. </h3>
+        Previously we saw how we can manipulate an entire dataset layer. But we can also modify 
+        individual elements in a GeoJSON layer. There is a method that belongs to L.FeatureGroup which
+        Geojson layer extends, <i><b>eachLayer()</b></i>. When this method is invoked in a variable 
+        that stores a Geojson layer, it allows us to access every layer(i.e individual circleMarkers). <br>
+        The method passes an anonymous function(cannot be accessed outside by being called and has no name)
+        that is invoked immediately for each layer contained within the GeoJSON layer. The function itself
+        accepts a parameter, in this case a layer, a reference to each layer. This enables us access each layer 
+        within this anonymous function and can perform any operation on them i.e logging in the console or 
+        or user events. <br><br>
+        
+        Create a map that users will console the distance between click point and point layer. <br>
+        Hint: Use .on() Leaflet method to listen for a click event, when it occurs, it should immediatley 
+        invoke an anonymous function. <br>
+
+        <img src="Code snipets/26.heatmapEvent.png" alt="heat map event code" 
+        style="height: 2200px; width: 800px;"> <br><br>
+
+        <div id="heatmapevent1" style="height: 400px; width: 800px;">MAP 26</div> <br><br>
+
+        Create a map that users will view all cities within 100km of click point. <br>
+        Hint: Use .on() Leaflet method to listen for a click event, when it occurs, it should immediatley 
+        invoke an anonymous function. <br><br>
+
+        <img src="Code snipets/27.checkDistance.png" alt="heat map event code" 
+        style="height: 2200px; width: 800px;"> <br><br>
+
+        Above JS code produced this map : <br> <br>
+        <div id="heatmapevent2" style="height: 400px; width: 800px;">MAP 27</div> <br><br>
+   
+        We can filter futher information from our map to get more insights. Suppose we want to 
+        categorise layers based on population, i.e dense, sparse and high. 
+        We could use conditional statements within the onEachFeature or filter options<br><br>
+        Create a map showing population distribution(3 classes) with layers coloured differently. 
+
+        <img src="Code snipets/28.popDistributionheatmap.png" alt="heat map event code" 
+        style="height: 2200px; width: 800px;"> <br><br>
+
+        Above JS code produced this map : <br> <br>
+        <div id="heatmap6" style="height: 400px; width: 800px;">MAP 28</div> <br><br>
+    </p>
+
+    <p>
+        <h3>Adding Leaflet Layer control. </h3>
+
+        Layer control allows us the user to switch on and off various layers we've created. Although 
+        redundant but for the purpose of this study, we will create new layers from the data based 
+        on population distribution so that they can be referenced by a variable name that will appear 
+        in the layer control. You will need to create an object whose property use these varaiable names 
+        and property names are texts we want to appear on the layer control. <br>
+        Finally you have to invove Leaflet's <i><b>L.controls.layers()</b></i><br><br> method that takes 
+        three parameters: first is the basemaps control if there multiple, second is the variable object that 
+        contain layer text name, and the last one, a boolean value to keep layer control UI open instead 
+        of collapsing it. <BR></BR>
+        <B>NOTE:</B> Note that the property names within the sourcesLayers object can include HTML tags. 
+        This gives designers more control as they can now colour text labels or even make them bold.   
+        
+        <img src="Code snipets/29.layerControl.png" alt="heat map with layer control code" 
+        style="height: 3000px; width: 800px;"> <br><br>
+
+        Above JS code produced this map : <br> <br>
+        <div id="heatmap7" style="height: 400px; width: 800px;">MAP 29</div> <br><br>
+
+        TRY REDUCE REDUNDANT CODE THAT GENERATED MAP ABOVE. 
+    </p>
+
+   
+
+
+
+
+    <div>
+
+    </div>
+
+
+
+
+
+    </p>
+
+
+
+
+
+    <p>
+    <h4>Adding Videos.</h4>
+    Add a video
+
+    <div id="" style="height: 400px; width: 800px;"></div>
+    </p>
+
+
+
+
+
+</body>
+
+<!-- Link to first map object -->
+<script src="js/Chapter1/map1.js"></script>
+
+<!-- wms layer -->
+<script src="js/Chapter1/wmsmap2.js"></script>
+
+<!-- wms srtm30 layer -->
+<script src="js/Chapter1/wmsmap3.js"></script>
+
+<!-- Dragable marker. -->
+<script src="js/Chapter1/nrbMarker.js"></script>
+
+<!-- Polylines , map 5-->
+<script src="js/Chapter1/polyline.js"></script>
+
+<!-- Polygon around mau area -->
+<script src="js/Chapter1/polygon.js"></script>
+
+<!-- Multiple features rouped together.  -->
+<script src="js/Chapter1/multifeatures.js"></script>
+
+<!-- Group layer -->
+<script src="js/Chapter1/grouplayers.js"></script>
+
+<!-- Feature group -->
+<script src="js/Chapter1/featuregroup.js"></script>
+
+<!-- Popup map , map 10-->
+<script src="js/Chapter1/popup.js"></script>
+
+<!-- Event 1 -->
+<script src="js/Chapter1/eventListener1.js"></script>
+
+<!-- Event 2 -->
+<script src="js/Chapter1/eventLatLng.js"></script>
+
+<!-- Event 3 -->
+<script src="js/Chapter1/dragevent.js"></script>
+
+<!-- Event 4 -->
+<script src="js/Chapter1/dragEvent2.js"></script>
+
+<!-- Custom function , map 15-->
+<script src="js/Chapter1/customPopup.js"></script>
+
+<!-- Add area geojson -->
+<script src="geojsonDataJS/NaiRegions.js"></script>
+
+<!-- Multifeature geojson polygon data  -->
+<script src="geojsonDataJS/nairobiData.js"></script>
+
+<!-- Styling multifeature geojson data -->
+<script src="geojsonDataJS/styleJsonFeatures.js"></script>
+
+<!-- Styling geojson layer based on an event , map 19-->
+<script src="geojsonDataJS/styleJsonFeatures2.js"></script>
+
+<!-- Styling geojson layer based on an event , map 20-->
+<script src="geojsonDataJS/styleJsonFeatures3.js"></script>
+
+<!-- Looping geojson, MAP 21 -->
+<script src="geojsonDataJS/loopGeojson1.js"></script>
+
+<!-- Loop geojson add circle markers in points, MAP 22  -->
+<script src="geojsonDataJS/loopGeojson2.js"></script>
+
+
+<!--  -->
+<!-- Load heatmap plug in  -->
+<script src="Chap3data/leaflet-heat.js"></script>
+<!--  -->
+
+<!-- Online Geojson heatmap data ,  -->
+<!-- <script src="http://leaflet.github.io/Leaflet.markercluster/example/realworld.10000.js"></script> -->
+
+<!-- Density Heat map script1 , map 23 -->
+<script src="js/Chapter3/heatmap1.js"></script>
+
+<!-- Intensity Heatmap based on  population, map 24 -->
+<script src="js/Chapter3/heatmap2.js"></script>
+
+<!-- Styling heat map circle markers, map 25 -->
+<script src="js/Chapter3/heatmap3.js"></script>
+
+<!-- Heat map event listener, map 26 -->
+<script src="js/Chapter3/heatmapevent1.js"></script>
+
+<!-- Heatmap event listener determine layers within 200km, map 27 -->
+<script src="js/Chapter3/heatmapevent2.js"></script>
+
+<!-- Bivariate analysis, map 28 -->
+<script src="js/Chapter3/heatmap6.js"></script>
+
+<!-- Heat map with layer control, map 29  -->
+<script src="js/Chapter3/heatmap7.js"></script>
+
+
+
+<!-- Video as a layer -MAP 15-->
+<script src="js/video.js"></script>
+
+
+
+</html>
